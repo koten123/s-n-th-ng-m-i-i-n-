@@ -1,4 +1,4 @@
-// Dữ liệu danh sách sản phẩm mẫu
+// 1. Mảng chứa dữ liệu danh sách sản phẩm
 const products = [
     {
         id: 1,
@@ -28,9 +28,13 @@ const products = [
 
 let cartCount = 0;
 
-// Hàm hiển thị danh sách sản phẩm ra DOM
+// 2. Hàm truy xuất DOM và hiển thị danh sách sản phẩm
 function renderProducts() {
     const productGrid = document.getElementById("productGrid");
+    
+    // Kiểm tra nếu không tìm thấy container thì dừng lại
+    if (!productGrid) return;
+    
     productGrid.innerHTML = "";
 
     products.forEach(product => {
@@ -52,12 +56,15 @@ function renderProducts() {
     });
 }
 
-// Xử lý sự kiện thêm vào giỏ hàng
+// 3. Xử lý sự kiện thêm vào giỏ hàng
 function addToCart() {
     cartCount++;
-    document.getElementById("cartCount").innerText = cartCount;
+    const cartCountEl = document.getElementById("cartCount");
+    if (cartCountEl) {
+        cartCountEl.innerText = cartCount;
+    }
     alert("Đã thêm sản phẩm vào giỏ hàng!");
 }
 
-// Chạy hàm render khi trang web tải xong
+// 4. Bắt sự kiện DOMContentLoaded để đảm bảo DOM tải xong mới chạy kịch bản
 document.addEventListener("DOMContentLoaded", renderProducts);
